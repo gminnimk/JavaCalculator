@@ -15,19 +15,17 @@ JAVA CALULATOR LV1
 
  */
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner; // Scanner를 사용하기 위한 import
 
 public class App {
     public static void main(String[] args) {
+        List results = new ArrayList<>(); // JCF 사용해서 컬렉션 선언.
         Scanner sc = new Scanner(System.in); // 양의 정수 2개를 전달 받기 위한 Scanner 선언.
         int result = 0; // 사칙연산에 따라 결과값 반환을 위한 변수 선언.
-
-        int max_results = 10; // 하드코딩 방지.
-        int[] results = new int[max_results]; // 연산의 결과를 저장할 수 있도록 적합한 타입의 배열을 생성.
-        int count = 0; // 연산의 결과가 저장된 배열의 마지막 index를 저장하는 변수를 선언
-
-
+        int count = 0;
 
         while (true) { // 무한 루프를 위한 while 반복문 선언.
 
@@ -65,32 +63,33 @@ public class App {
 
             // 결과값 확인.
             System.out.println("결과 : " + result);
+            results.add(result); // 결과값을 계산 후 배열에 저장하는 구문.
 
 
-            //■ 복습 필요
-            // 연산 결과가 10개를 초과하는 경우 가장 먼저 저장된 결과 삭제 및 새로운 연산 결과가 저장.
-            if (count < max_results) { // 10개 초과 아닐시
-                results[count] = result; // 연산의 결과를 배열에 저장
-                count++; // index 증가
-            } else { // 배열이 가득 찬 경우, 가장 먼저 저장된 결과를 삭제하고 새로운 결과 저장
-                for (int i = 0; i < max_results - 1; i++) { // 반복문을 통해
-                    results[i] = results[i + 1]; // 배열에 i번째를 배열의 i+1 번째로 대입. 앞당기기 , 즉 가장 먼저 저장된 결과 삭제 및 새로운 결과를 저장
+            // ■ 복습 필요 / level1 - 7
+            // 연산 결과가 10개로 고정되지 않고 무한히 저장될 수 있도록 소스코드를 수정.
+            System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
+            String str = sc.next(); // String 타입의 str 변수 선언 후 sc.next()로 문자열 입력받기.
+            if (str.equals("remove")) { // str 변수가 equals 함수를 사용해서 remove 문자열과 동일시 조건문 발동
+                if (!results.isEmpty()) { // 배열이 비어있지 않다면 조건문 발동
+                    int removedResults = (int) results.remove(0); // 가장 먼저 저장된 결과를 삭제.
+                    System.out.println("삭제된 결과 : " + removedResults); // 삭제된 결과를 출력
+                } else { // 배열이 비어있다면
+                    System.out.println("삭제할 결과가 없습니다.");
                 }
-                results[max_results - 1] = result; // 배열에 'max_results - 1' 번째의 값은  곧  result로 명시
             }
 
 
-
             // ▶ 숙지
+            // 배열에 값이 제대로 들어갔는지 확인하기 위함.
             // 배열에 들어간 값을 확인하기 위해서는 results 가 아닌 Arrays.toString(results)와 같이 작성
             // Arrays를 사용하기 위해서는 import로 라이브러리를 가져와야 함.
-            System.out.println("배열 확인 : " + Arrays.toString(results) + " " + "count : " + count); // 배열에 값이 들어갔는지 확인.
-
+            System.out.println("배열 확인 : " + Arrays.toString(new List[]{results}) + " " + "count : " + count); // 배열에 값이 들어갔는지 확인.
 
 
             // exit 문자열 입력시 break를 이용해 무한 루프를 빠져나옴.
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
-            String str = sc.next();
+            str = sc.next();
             if (str.equals("exit")) { // equals 사용해서 이와 같은 문자열과 똑같은 문자를 입력받을시 조건문 실행.
                 System.out.println("프로그램을  종료하겠습니다.");
                 break;
