@@ -15,6 +15,9 @@ JAVA CALULATOR LV1
 
  */
 
+
+
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +28,7 @@ public class App {
         List results = new ArrayList<>(); // JCF 사용해서 컬렉션 선언.
         Scanner sc = new Scanner(System.in); // 양의 정수 2개를 전달 받기 위한 Scanner 선언.
         int result = 0; // 사칙연산에 따라 결과값 반환을 위한 변수 선언.
-        int count = 0;
+        int count = 0; // 배열의 순회가 몇번째 인지 확인하기 위한 변수 선언.
 
         while (true) { // 무한 루프를 위한 while 반복문 선언.
 
@@ -79,6 +82,34 @@ public class App {
                 }
             }
 
+
+            // "inquiry"라는 문자열이 입력되면 저장된 연산 결과 전부를 출력.
+            // foreach(향상된 for문)을 활용하여 구현
+
+            System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
+            str = sc.next();
+            if (str.equals("inquiry")) { // 'inquiry' 입력시 조건문 발동
+                if (!results.isEmpty()) { // 배열이 비어있지 않을시
+                    System.out.println("저장된 연산 결과 : ");
+                    for (Object res : results) { // 향상된 for문 res 변수가 results 배열길이 까지
+                        // 배열에 저장된 값인 처음부터 끝까지 차례대료 res에 저장되고 그 값이 출력되는 구조
+                        // for(자료형 변수명 : 배열명){
+                        //	문장
+                        // }
+
+                        // ■ 변경 필요
+                        // 배열 형태로 출력을 하고 싶은데 추후 공부 후 수정 필요.
+                        System.out.println(res + " " + "count : " + count);
+                    }
+                } else {
+                    System.out.println("삭제할 결과가 없습니다.");
+                }
+            }
+
+
+
+
+            // 따로 확인하기 위한 구문 (문제에서 명시 X)
 
             // ▶ 숙지
             // 배열에 값이 제대로 들어갔는지 확인하기 위함.
