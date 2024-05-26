@@ -15,6 +15,7 @@ JAVA CALULATOR LV1
  */
 
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class App {
@@ -86,18 +87,20 @@ public class App {
 
             /* 연산의 결과를 배열에 저장합니다. */
             /* index를 증가 시킵니다. */
-            arrays[count] = +result; // 연산의 결과를 배열에 저장
-            count++; // index 증가
+            if (count < max_results) {
+                arrays[count] = result;
+                count++;
+            } else {
+                // 연산 결과가 10개 초과하는 경우 가장 먼저 저장된 결과를 삭제 & 새로운 연산 결과가 저장.
+                for (int i = 0; i < max_results - 1; i++)
+                    arrays[i] = arrays[i + 1];
+            }
+            arrays[max_results - 1] = result;
 
             if (count == max_results) {
                 System.out.println("연산 결과가 가득 찼습니다. 프로그램을 종료합니다.");
                 break;
             }
-
-
-            // 연산 결과가 10개 초과하는 경우 가장 먼저 저장된 결과를 삭제 & 새로운 연산 결과가 저장.
-
-
         }
     }
 }
