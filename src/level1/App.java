@@ -82,8 +82,8 @@ public class App {
             // exit 문자열 입력시 break를 이용해 무한 루프를 빠져나옴.
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             String str = sc.next();
-            if (str.equals("exit")) { // equals를 사용해서 이와 같은 문자열과 똑같은 문자를 입력받을시 조건문 실행.
-                System.out.println("프로그램을 종료하겠습니다.");
+            if (str.equals("exit")) { // equals 사용해서 이와 같은 문자열과 똑같은 문자를 입력받을시 조건문 실행.
+                System.out.println("프로그램을  종료하겠습니다.");
                 break;
             }
         }
