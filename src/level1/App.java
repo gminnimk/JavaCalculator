@@ -73,7 +73,7 @@ public class App {
                 results[count] = result; // 연산의 결과를 배열에 저장
                 count++; // index 증가
             } else { // 배열이 가득 찬 경우, 가장 먼저 저장된 결과를 삭제하고 새로운 결과 저장
-                for (int i = 0; i < max_results - 1; i++) { // 반복문을 통해서
+                for (int i = 0; i < max_results - 1; i++) { // 반복문을 통해
                     results[i] = results[i + 1]; // 배열에 i번째를 배열의 i+1 번째로 대입. 앞당기기 , 즉 가장 먼저 저장된 결과 삭제 및 새로운 결과를 저장
                 }
                 results[max_results - 1] = result; // 배열에 'max_results - 1' 번째의 값은  곧  result로 명시
