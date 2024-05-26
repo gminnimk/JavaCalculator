@@ -15,18 +15,19 @@ JAVA CALULATOR LV1
  */
 
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
+        // 적합한 컬렉션 타입의 변수 선언
+        List<Integer> arrays = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
 
         /* 연산의 결과를 저장할 수 있도록 적합한 타입의 배열을 생성합니다. */
         /* 연산의 결과가 저장된 배열의 마지막 index를 저장하는 변수를 선언 */
-        final int max_results = 10;  // 연산 결과를 저장할 수 있는 최대 갯수
-        int[] arrays = new int[max_results];
         int count = 0;
 
         int result = 0;
@@ -71,36 +72,37 @@ public class App {
             }
 
 
-            // exit 문자열 입력시 무한 루프에서 벗어남.
-            System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
 
-            String str = sc.next();
-            if (str.equals("exit")) {
-                System.out.println("프로그램을 종료합니다.");
-                break;
-            }
 
             // 입력받은 양의 정수 2개와 사칙연산 기호를 사용하여 연산을 진행한 후 결과값을 출력
             // 결과 확인하기 위한 출력문
             System.out.println("결과 : " + result);
+            arrays.add(result);
 
 
-            /* 연산의 결과를 배열에 저장합니다. */
-            /* index를 증가 시킵니다. */
-            if (count < max_results) {
-                arrays[count] = result;
-                count++;
-            } else {
-                // 연산 결과가 10개 초과하는 경우 가장 먼저 저장된 결과를 삭제 & 새로운 연산 결과가 저장.
-                for (int i = 0; i < max_results - 1; i++)
-                    arrays[i] = arrays[i + 1];
+            // 연산 결과가 10개로 고정되지 않고 무한이 저장될 수 있도록 소스 코드를 수정!
+            // re
+            System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
+            String str = sc.next();
+            if (str.equals("remove")) {
+                if (!arrays.isEmpty()) {
+                    int removedArrays = arrays.remove(0);
+                    System.out.println("삭제된 결과 : " + removedArrays);
+                } else {
+                    System.out.println("삭제할 결과가 없습니다.");
+                }
+                continue;
             }
-            arrays[max_results - 1] = result;
 
-            if (count == max_results) {
-                System.out.println("연산 결과가 가득 찼습니다. 프로그램을 종료합니다.");
+            // exit 문자열 입력시 무한 루프에서 벗어남.
+            System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
+
+            String str1 = sc.next();
+            if (str1.equals("exit")) {
+                System.out.println("프로그램을 종료합니다.");
                 break;
             }
+
         }
     }
 }
