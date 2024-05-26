@@ -21,6 +21,7 @@ public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+
         /* 연산의 결과를 저장할 수 있도록 적합한 타입의 배열을 생성합니다. */
         /* 연산의 결과가 저장된 배열의 마지막 index를 저장하는 변수를 선언 */
         final int max_results = 10;  // 연산 결과를 저장할 수 있는 최대 갯수
@@ -60,17 +61,21 @@ public class App {
             } else if (operator == '/') {
                 if (num2 == 0) { // 두 번째 입력된 값이 0일때 오류 발생
                     System.out.println("나눗셈 연산에서 분모에 0이 입력될 수 없습니다.");
+                    continue;  // 프로그램이 종료되지 않고 다시 입력할 수 있게 설정
                 }
                 result = num1 / num2;
             } else {    // 사칙연산에서 벗어난 기호는 따로 처리
                 System.out.println("기호를 잘못 입력하였습니다.");
+                continue; // 프로그램이 종료되지 않고 다시 입력할 수 있게 설정
             }
 
-            // exit 문자열 입력시 무한 루프에서 벗어남.
 
+            // exit 문자열 입력시 무한 루프에서 벗어남.
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
+
             String str = sc.next();
             if (str.equals("exit")) {
+                System.out.println("프로그램을 종료합니다.");
                 break;
             }
 
@@ -81,9 +86,16 @@ public class App {
 
             /* 연산의 결과를 배열에 저장합니다. */
             /* index를 증가 시킵니다. */
-            arrays[count] =+ result; // 연산의 결과를 배열에 저장
+            arrays[count] = +result; // 연산의 결과를 배열에 저장
             count++; // index 증가
 
+            if (count == max_results) {
+                System.out.println("연산 결과가 가득 찼습니다. 프로그램을 종료합니다.");
+                break;
+            }
+
+
+            // 연산 결과가 10개 초과하는 경우 가장 먼저 저장된 결과를 삭제 & 새로운 연산 결과가 저장.
 
 
         }
