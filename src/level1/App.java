@@ -27,13 +27,12 @@ public class App {
 
 
         /* 연산의 결과를 저장할 수 있도록 적합한 타입의 배열을 생성합니다. */
-        /* 연산의 결과가 저장된 배열의 마지막 index를 저장하는 변수를 선언 */
-        int count = 0;
 
         int result = 0;
 
 
         while (true) { // 반복문을 사용해서 무한 루프
+
 
             System.out.println("첫 번째 숫자를 입력하세요: ");
             // Scanner를 사용하여 양의 정수를 입력받고 적합한 타입의 변수에 저장합니다.
@@ -72,8 +71,6 @@ public class App {
             }
 
 
-
-
             // 입력받은 양의 정수 2개와 사칙연산 기호를 사용하여 연산을 진행한 후 결과값을 출력
             // 결과 확인하기 위한 출력문
             System.out.println("결과 : " + result);
@@ -81,7 +78,7 @@ public class App {
 
 
             // 연산 결과가 10개로 고정되지 않고 무한이 저장될 수 있도록 소스 코드를 수정!
-            // re
+
             System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
             String str = sc.next();
             if (str.equals("remove")) {
@@ -91,18 +88,29 @@ public class App {
                 } else {
                     System.out.println("삭제할 결과가 없습니다.");
                 }
-                continue;
             }
+
+            System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
+            str = sc.next();
+            if (str.equals("inquiry")) {
+                if (!arrays.isEmpty()) {
+                    System.out.println("저장된 결과를 조회합니다.");
+                    for (int ignored : arrays) {
+                        System.out.println(result);
+                    }
+                } else {
+                    System.out.println("저장된 결과가 없습니다.");
+                }
+            }
+
 
             // exit 문자열 입력시 무한 루프에서 벗어남.
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
-
-            String str1 = sc.next();
-            if (str1.equals("exit")) {
+            str = sc.next();
+            if (str.equals("exit")) {
                 System.out.println("프로그램을 종료합니다.");
                 break;
             }
-
         }
     }
 }
