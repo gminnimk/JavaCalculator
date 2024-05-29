@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 // 예외처리 할 Exception 클래스를 생성
+// Calculator의 사용자 정의 예외 클래스
 class CalculatorException extends Exception {
     public CalculatorException(String message) {
         super(message);
     }
 }
 
+
+// App 클래스의 main 메서드에서 Calculator 클래스의 연산 결과를 저장하고 있는 컬렉션 필드에 직접 접근하지
+// 못하도록 수정 (= 캡슐화)
 
 public class Calculator {
 
@@ -21,9 +25,15 @@ public class Calculator {
         results = new ArrayList<>();
     }
 
+
     // 계산 결과 리스트를 반환하는 메서드
     public List<Double> getResults() {
-        return results;
+        return new ArrayList<>(results); // 방어적 복사
+    }
+
+    // 결과 리스트를 반환하는 Setter 메서드
+    public void setResults(List<Double> results) {
+        this.results = new ArrayList<>(results);
     }
 
 
@@ -63,6 +73,8 @@ public class Calculator {
             System.out.println("오류 메시지. " + e.getMessage());
         }
 
+
+        // getter 메서드 사용
         System.out.println("저장된 결과 출력: " + calculator.getResults());
     }
 }
