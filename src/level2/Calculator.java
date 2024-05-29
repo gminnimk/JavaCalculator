@@ -69,9 +69,18 @@ public class Calculator {
 
 
     // 간접 접근을 통해 필드에 접근하여 가져올 수 있도록 구현 (Setter 메서드)
+    // 외부에서 results 리스트를 수정할 수 있게 함.
     // ★ 주의 ★
     public void setResults(List<Double> results) {
         this.results = new ArrayList<>(results);
+    }
+
+    public void removeResults() {
+        if (!results.isEmpty()) {
+            results.remove(0);
+        } else {
+            System.out.println("삭제할 결과가 없습니다.");
+        }
     }
 
 

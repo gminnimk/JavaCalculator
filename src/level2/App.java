@@ -39,6 +39,15 @@ public class App {
                 // 예외 발생시 메시지 출력
                 System.out.println(e.getMessage());
             }
+
+            // 삭제 출력문 추가
+            System.out.println("결과를 삭제하시겠습니까? (yes 입력 시 삭제): ");
+            String yes = sc.next();
+            if(yes.equals("yes")){
+                calc.removeResults();
+                System.out.println("첫 번째 결과가 삭제되었습니다.");
+                System.out.println("현재까지의 모든 결과: " + calc.getResults());
+            }
             /* 반복문 종료 */
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             String exit = sc.next();
