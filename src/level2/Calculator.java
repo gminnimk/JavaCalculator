@@ -16,8 +16,14 @@ public class Calculator {
     // 연산 결과를 저장하는 컬렉션 타입
     private List<Double> results;
 
+    // Calculator 생성자
     public Calculator() {
         results = new ArrayList<>();
+    }
+
+    // 계산 결과 리스트를 반환하는 메서드
+    public List<Double> getResults() {
+        return results;
     }
 
 
@@ -46,7 +52,6 @@ public class Calculator {
     public static void main(String[] args) {
         Calculator calculator = new Calculator(); // 테스트를 위한 인스턴스 객체 생성
 
-
         // 정상작동을 위한 예제문 출력
         try {
             System.out.println("3 + 2 =" + calculator.calculate(3, 2, '+'));
@@ -58,6 +63,6 @@ public class Calculator {
             System.out.println("오류 메시지. " + e.getMessage());
         }
 
-        System.out.println("저장된 결과 출력: " + calculator.results);
+        System.out.println("저장된 결과 출력: " + calculator.getResults());
     }
 }
