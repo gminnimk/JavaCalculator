@@ -18,6 +18,7 @@ class CalculatorException extends Exception {
 public class Calculator {
 
     // 연산 결과를 저장하는 컬렉션 타입
+    // 필드 캡슐화 : results 리스트를 private로 설정하여 직접 접근을 막음
     private List<Double> results;
 
     // Calculator 생성자
@@ -26,12 +27,18 @@ public class Calculator {
     }
 
 
-    // 계산 결과 리스트를 반환하는 메서드
+    // 계산 결과 리스트를 반환하는 Getter 메서드
+    // getResults() 를 추가하여 result 리스트에 간접적으로 접근할 수 있게 함.
+    // 방어적 복사를 사용해서 외부에서 리스트를 변경할 수 없도록 함.
+    // 이 방법은 Calculator 클래스의 필드에 직접 접근하지 않고, 메서드를 통해 안전하게 접근하는 방법.
     public List<Double> getResults() {
         return new ArrayList<>(results); // 방어적 복사
     }
 
     // 결과 리스트를 반환하는 Setter 메서드
+    // setResults(List<Double> results) 를 추가해서 외부에서 'results' 리스트를 수정할 수 없게 함.
+    // 방어적 복사를 사용하여 내부 리스트가 외부의 리스트 변경에 영향을 받지 않도록.
+    // 이 방법은 Calculator 클래스의 필드에 직접 접근하지 않고, 메서드를 통해 안전하게 접근하는 방법.
     public void setResults(List<Double> results) {
         this.results = new ArrayList<>(results);
     }

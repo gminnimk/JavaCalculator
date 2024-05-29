@@ -37,7 +37,9 @@ public class App {
             try {
                 //예외발생할 가능성이 있는 문장을 작성
                 double result = calculate.calculate(num1, num2, operator); // Calculator 클래스에서 계산 수행
-                System.out.println("결과: " + result);
+                // calculator.getResults()를 사용하여 결과 리스트를 출력 .
+                // 이 방법은 Calculator 클래스의 필드에 직접 접근하지 않고, 메서드를 통해 안전하게 접근하는 방법.
+                System.out.println("결과: " + calculate.getResults());
             } catch (CalculatorException e) {
                 //예외발생시 throw
                 System.out.println("오류: " + e.getMessage());
