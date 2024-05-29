@@ -19,10 +19,11 @@ public class Calculator {
 
     // 연산 결과를 저장하는 컬렉션 타입 필드 선언 및 생성
     // ★ 컬렉션 선언 시 주의 ★
-    private static List<Double> results;
+    private List<Double> results;
 
 
     // main 클래스에서 호출하기 위한 메서드 생성
+
     public Calculator() {
         results = new ArrayList<>();
     }
@@ -57,6 +58,22 @@ public class Calculator {
         return result;
     }
 
+    // App 클래스에서 Calculator 클래스의 연산 결과를 저장하고 있는 컬렉션 필드(= results)에
+    // 직접 접근하지 못하도록 수정(=캡슐화)
+
+    // 간접 접근을 통해 필드에 접근하여 가져올 수 있도록 구현 (Getter 메서드)
+    // ★ 주의 ★
+    public List<Double> getResults() {
+        return new ArrayList<>(results);
+    }
+
+
+    // 간접 접근을 통해 필드에 접근하여 가져올 수 있도록 구현 (Setter 메서드)
+    // ★ 주의 ★
+    public void setResults(List<Double> results) {
+        this.results = new ArrayList<>(results);
+    }
+
 
     // 양의 정수 2개 & 연산 기호를 매개변수로 받아 사칙연산 기능 수행 후
     // 결과 값을 반환하는 메서드와 연산 결과를 저장
@@ -79,7 +96,7 @@ public class Calculator {
             System.out.println("오류 : " + e.getMessage());
         }
 
-        System.out.println("저장된 결과 출력 :" + Calculator.results);
+        System.out.println("저장된 결과 출력 :" + calculator.getResults());
 
     }
 }

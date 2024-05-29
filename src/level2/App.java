@@ -26,7 +26,6 @@ public class App {
             char operator = sc.next().charAt(0);
 
 
-
             //        - 연산 수행 역할은 Calculator 클래스가 담당합니다.
             //        - 연산 결과는 Calculator 클래스의 연산 결과를 저장하는 필드에 저장됩니다.
 
@@ -36,7 +35,7 @@ public class App {
             try {
                 double result = calc.calculate(num1, num2, operator);
                 System.out.println("결과 : " + result);
-            } catch(CalculateException e) {
+            } catch (CalculateException e) {
                 // 예외 발생시 메시지 출력
                 System.out.println(e.getMessage());
             }
