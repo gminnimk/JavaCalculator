@@ -1,12 +1,12 @@
 package level2;
 
 
-//2. Level 1에서 구현한 App 클래스의 main 메서드에 Calculator 클래스가 활용될 수 있도록 수정합니다.
-//        - 연산 수행 역할은 Calculator 클래스가 담당합니다.
-//        - 연산 결과는 Calculator 클래스의 연산 결과를 저장하는 필드에 저장됩니다.
+// Level 2 - 6
+// App 클래스 수정된 점
+// Calculator 인스턴스를 생성할 때 초기 결과 리스트를 전달하는 예제를 추가
+// initialResults 리스틀르 생성하고, 이를 사용하여 Calculator 객체를 초기화.
+// 나머지는 유지
 
-
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
