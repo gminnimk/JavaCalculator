@@ -2,6 +2,7 @@ package level2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 // 예외처리 할 Exception 클래스를 생성
 // Calculator의 사용자 정의 예외 클래스
@@ -66,9 +67,21 @@ public class Calculator {
         return result; // 결과값을 새로 반환
     }
 
+
+    // removeResult 메서드 추가
+    // 리스트에서 가장 먼저 저장된 데이터를 삭제
+    // 리스트가 비어있을 경우 메시지를 출력.
+    public void removeResult() {
+        if (!results.isEmpty()) {
+            results.remove(0);
+        } else {
+            System.out.println("삭제할 결과가 없습니다.");
+        }
+    }
+
     public static void main(String[] args) {
         Calculator calculator = new Calculator(); // 테스트를 위한 인스턴스 객체 생성
-
+        Scanner sc =new Scanner(System.in);
         // 정상작동을 위한 예제문 출력
         try {
             System.out.println("3 + 2 =" + calculator.calculate(3, 2, '+'));
@@ -80,8 +93,11 @@ public class Calculator {
             System.out.println("오류 메시지. " + e.getMessage());
         }
 
-
+        // 연산 결과 리스트 출력
         // getter 메서드 사용
         System.out.println("저장된 결과 출력: " + calculator.getResults());
+
+
+
     }
 }

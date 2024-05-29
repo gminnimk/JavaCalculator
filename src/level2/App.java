@@ -9,6 +9,7 @@ package level2;
 
 import java.util.Scanner;
 
+
 public class App {
     public static void main(String[] args) {
         /* Calculator 인스턴스 생성 */
@@ -46,12 +47,27 @@ public class App {
             }
 
 
+            // removeResult 메서드 호출
+            // 사용자에게 결과를 삭제할지 묻는 출력문 생성.
+            // yes를 입력시 calculator.removeResult() 를 호출하여 첫 번째 결과 삭제
+            // 삭제 후 모든 결과 출력
+
+            System.out.println("결과를 삭제하시겠습니까? (yes 입력 시 삭제): ");
+            String yes = sc.next(); // 문자열 입력받기
+            if (yes.equals("yes")) {
+                calculate.removeResult();
+                System.out.println("첫 번째 결과가 삭제되었습니다.");
+                System.out.println("현재까지의 모든 결과: " + calculate.getResults());
+            }
+
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)"); // 반복문 탈출을 할건지에 대한 출력문
             String exit = sc.next(); // 문자열 입력받기
             if (exit.equals("exit")) { // eqauls 를 사용해서 exit 문자열과 똑같을 시 아래 조건문 실행
                 System.out.println("프로그램을 종료합니다."); // 종료를 알리는 출력문
                 break; // 반복문 탈출
             }
+
+
         }
     }
 }
