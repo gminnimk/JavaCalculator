@@ -7,12 +7,19 @@ package level2;
 
 
 import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
+
+        // 초기 연산 결과 리스트 생성
+        List<Double> initialResults = new ArrayList<>();
+        initialResults.add(10.0);
+        initialResults.add(20.0);
         /* Calculator 인스턴스 생성 */
-        Calculator calc = new Calculator();
+        Calculator calc = new Calculator(initialResults);
 
         Scanner sc = new Scanner(System.in);
 

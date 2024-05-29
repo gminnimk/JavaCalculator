@@ -23,10 +23,18 @@ public class Calculator {
 
 
     // main 클래스에서 호출하기 위한 메서드 생성
-
+    // 생성자 : results 리스트를 초기화 (와부애서 초기값을 받을 수 있도록 수정)
     public Calculator() {
-        results = new ArrayList<>();
+        this.results = new ArrayList<>();
     }
+
+    public Calculator(List<Double> initialResults) {
+        this.results = new ArrayList<>(initialResults);
+    }
+
+
+
+
 
 
     // (1). 나눗셈에서 분모에 0이 들어오는 경우
@@ -64,7 +72,7 @@ public class Calculator {
     // 간접 접근을 통해 필드에 접근하여 가져올 수 있도록 구현 (Getter 메서드)
     // ★ 주의 ★
     public List<Double> getResults() {
-        return new ArrayList<>(results);
+        return new ArrayList<>(results); // 방어적 복사
     }
 
 
@@ -72,7 +80,7 @@ public class Calculator {
     // 외부에서 results 리스트를 수정할 수 있게 함.
     // ★ 주의 ★
     public void setResults(List<Double> results) {
-        this.results = new ArrayList<>(results);
+        this.results = new ArrayList<>(results); // 방어적 복사
     }
 
 
@@ -97,6 +105,10 @@ public class Calculator {
 
 
     public static void main(String[] args) {
+
+
+
+        // Calculator 인스턴스 생성 (초기 결과 리스트를 전달)
         Calculator calculator = new Calculator();
 
         // 위 로직이 잘 수행이 되는지 확인하기 위한 출력문 생성
