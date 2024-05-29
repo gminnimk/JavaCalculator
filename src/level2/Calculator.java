@@ -75,12 +75,20 @@ public class Calculator {
         this.results = new ArrayList<>(results);
     }
 
+
+    // 삭제를 위한 메서드
     public void removeResults() {
         if (!results.isEmpty()) {
             results.remove(0);
         } else {
             System.out.println("삭제할 결과가 없습니다.");
         }
+    }
+
+
+    // 조회를 위한 메서드
+    public void inquiryResults() {
+        System.out.println("저장된 결과 : " + getResults());
     }
 
 

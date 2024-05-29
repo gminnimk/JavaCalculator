@@ -6,6 +6,7 @@ package level2;
 //        - 연산 결과는 Calculator 클래스의 연산 결과를 저장하는 필드에 저장됩니다.
 
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class App {
@@ -40,14 +41,25 @@ public class App {
                 System.out.println(e.getMessage());
             }
 
+
             // 삭제 출력문 추가
             System.out.println("결과를 삭제하시겠습니까? (yes 입력 시 삭제): ");
             String yes = sc.next();
-            if(yes.equals("yes")){
+            if (yes.equals("yes")) {
                 calc.removeResults();
                 System.out.println("첫 번째 결과가 삭제되었습니다.");
-                System.out.println("현재까지의 모든 결과: " + calc.getResults());
             }
+
+            // 조회 출력문 추가
+            System.out.println("결과를 조회하시겠습니까? (inquiry 입력 시 조회): ");
+            String inquiry = sc.next();
+            if (inquiry.equals("inquiry")) {
+                calc.inquiryResults();
+                System.out.println("저장된 결과를 조회하였습니다.");
+            }
+
+
+
             /* 반복문 종료 */
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             String exit = sc.next();
