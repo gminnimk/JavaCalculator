@@ -40,9 +40,16 @@ public class App {
             if (delete.equals("delete")) {
                 calc.removeResult(); // Calculator에서 삭제 기능이 구현된 메서드를 가져와서 사용.
                 System.out.println("가장 먼저 저장된 데이터를 삭제하였습니다.");
-                System.out.println("결과 확인 : " + calc.getResults()); // 삭제가 정상적으로 되었는지 확인하기 위한 getResults 메서드 활용
             }
 
+
+            // 조회를 할건지?
+            System.out.println("저장된 데이터를 조회 하시겠습니까? (inquiry 입력 시 조회)");
+            String inquiry = sc.next();
+            if (inquiry.equals("inquiry")) {
+                System.out.println("저장된 데이터를 조회하겠습니다.");
+                System.out.println("결과 확인 : " + calc.getResults());
+            }
 
             // 더 계산할지?
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");

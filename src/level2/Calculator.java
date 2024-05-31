@@ -120,6 +120,7 @@ public class Calculator {
         results.remove(0); // 가장 먼저 저장된 데이터를 삭제.
     }
 
+
     public static void main(String[] args) {
     }
 }
