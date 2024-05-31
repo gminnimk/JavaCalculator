@@ -1,62 +1,58 @@
 package level2;
 
-import java.util.Scanner;
+
+
+import java.util.*;
 
 public class App {
+
     public static void main(String[] args) {
-        Calculator calc = new Calculator();
         Scanner sc = new Scanner(System.in);
 
-        while (true) {
-            System.out.println("1. 사칙연산");
-            System.out.println("2. 원의 넓이 계산");
-            System.out.println("3. 사칙연산 결과 삭제");
-            System.out.println("4. 원의 넓이 결과 삭제");
-            System.out.println("5. 사칙연산 결과 조회");
-            System.out.println("6. 원의 넓이 결과 조회");
-            System.out.println("exit: 프로그램 종료");
-            String choice = sc.next();
+        ArithmeticCalculator arithmeticCalculator = new ArithmeticCalculator(new ArrayList<>());
+        CircleCalculator circleCalculator = new CircleCalculator(new ArrayList<>());
 
-            if (choice.equals("1")) {
+        do {
+
+            System.out.println("어떤 계산을 하시겠습니가? (1: 사칙연산, 2: 원의 넚이)");
+            int choice = sc.nextInt();
+
+            if(choice == 1) {
                 System.out.print("첫 번째 숫자를 입력하세요: ");
                 int num1 = sc.nextInt();
                 System.out.print("두 번째 숫자를 입력하세요: ");
                 int num2 = sc.nextInt();
-                System.out.print("사칙연산 기호를 입력하세요: ");
+
+                System.out.print("사칙연산 기호를 입력하세요: "); // +, -, *, /
+                /* charAt(idx) : charAt 메서드는 매개변수로 char 타입으로 반환 하고자하는 문자열의 위치(index)를 받는다. */
                 char operator = sc.next().charAt(0);
 
-                try {
-                    double result = calc.calculate(num1, num2, operator);
-                    System.out.println("결과: " + result);
-                    System.out.println("현재까지의 결과 리스트: " + calc.getResults());
-                } catch (CalculatorException e) {
-                    System.out.println("오류 발생: " + e.getMessage());
-                }
-            } else if (choice.equals("2")) {
-                System.out.println("원의 반지름을 입력해주세요: ");
-                double radius = sc.nextDouble();
-                double area = calc.calculateCircleArea(radius);
-                System.out.println("원의 넓이: " + area);
-                System.out.println("현재까지의 원의 넓이 결과 리스트: " + calc.getCircleareas());
-            } else if (choice.equals("3")) {
-                calc.removeResults();
-                System.out.println("첫 번째 사칙연산 결과가 삭제되었습니다.");
-                System.out.println("현재까지의 사칙연산 결과 리스트: " + calc.getResults());
-            } else if (choice.equals("4")) {
-                calc.removeCircleareas();
-                System.out.println("첫 번째 원의 넓이 결과가 삭제되었습니다.");
-                System.out.println("현재까지의 원의 넓이 결과 리스트: " + calc.getCircleareas());
-            } else if (choice.equals("5")) {
-                calc.inquiryResults();
-            } else if (choice.equals("6")) {
-                calc.inquiryCircleareas();
-            } else if (choice.equalsIgnoreCase("exit")) {
-                break;
-            } else {
-                System.out.println("잘못된 선택입니다.");
-            }
-        }
+                double result = arithmeticCalculator.calculate(num1, num2, operator);
+                arithmeticCalculator.getResults().add(result);
 
-        sc.close();
+                System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
+                if (Objects.equals(sc.next(), "remove")) {
+                    arithmeticCalculator.removeResult(0);
+                }
+
+                System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
+                if (Objects.equals(sc.next(), "inquiry")) {
+                    arithmeticCalculator.inquiryResults();
+                }
+            } else {
+                System.out.println("원의 반지름을 입력하세요: ");
+                int radius = sc.nextInt();
+
+                double area = circleCalculator.calculate(radius);
+                circleCalculator.getResults().add(area);
+                System.out.println("반지름이 " + radius + "인 원의 넓이는 : " + area);
+
+                System.out.println("저장된 원의 넓이 전체 조회: ");
+                circleCalculator.inquiryResults();
+            }
+
+            System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
+        } while (!sc.next().equals("exit"));
+
     }
 }
