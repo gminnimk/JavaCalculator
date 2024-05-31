@@ -5,6 +5,24 @@
 // Calculator(List<Double> initialResults)를 추가.
 // 이 생성자는 외부에서 초기 결과 리스트를 전달받아 'results' 필드를 초기화
 
+
+
+//초기화의 의미
+//        객체의 상태 설정:
+//
+//        객체가 생성될 때 필요한 초기 데이터를 설정합니다.
+//        예를 들어, Calculator 객체의 경우 연산 결과를 저장할 리스트를 초기화합니다.
+//        안전성:
+//
+//        초기화를 통해 객체의 필드가 유효한 값을 가지도록 보장합니다.
+//        필드를 초기화하지 않으면 null 상태로 남아 예기치 않은 오류를 발생시킬 수 있습니다. 예를 들어, results 필드가 null인 상태에서 리스트에 접근하려 하면 NullPointerException이 발생할 수 있습니다.
+//        독립성:
+//
+//        초기화 시 전달받은 데이터를 복사하여 독립적인 객체를 생성합니다.
+//        이를 통해 초기값 리스트가 변경되더라도 Calculator 객체의 내부 상태가 영향을 받지 않도록 합니다. 예를 들어, initialResults 리스트가 변경되더라도 Calculator 객체의 results 필드는 영향을 받지 않습니다.
+
+
+
 // results 필드의 초기화를 생성자를 통해 이루어지도록 수정함.
 
 package level2;
@@ -32,23 +50,12 @@ public class Calculator {
     // 생성자 : results 리스트를 초기화 (와부애서 초기값을 받을 수 있도록 수정)
 
 
-    // 기본 생성자
-    // results 필드를 빈 ArrayList로 초기화
-    // Calculator 객체가 기본 생성자를 통해 생설될 때 호출 됨.
-    public Calculator() {
-        this.results = new ArrayList<>(); // results 필드를 빈 ArrayList 로 초기화
-    }
-
-
     // 초기값을 받는 생성자
     // initialResults 리스트의 내용을 복사하여 results 필드를 초기화
     // Calculator 객체가 초기 결과값 리스트를 전달받아 생성될 때 호출.
     public Calculator(List<Double> initialResults) {
-        this.results = new ArrayList<>(initialResults);
+        this.results = new ArrayList<>(initialResults); // results 필드를 빈 ArrayList 로 초기화
     }
-
-
-
 
 
 
@@ -97,6 +104,9 @@ public class Calculator {
     // 이런 경우에는 setResults() 메서드는 사용 X
     // 만약 결과값 리스트를 외부에서 설정해야 하는 경우나 다른 용도로 사용해야 한다면 setResults() 메서드가 필요할 수 있습니다.
     // ★ 주의 ★
+
+
+    // 결과 리스트를 설정하는 Setter 메서드 (옵션, 필요 시 사용)
     public void setResults(List<Double> results) {
         this.results = new ArrayList<>(results); // 방어적 복사
     }

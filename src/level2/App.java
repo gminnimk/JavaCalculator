@@ -17,15 +17,18 @@ public class App {
         // List<Double> : 제네릭 타입을 사용하여 Double 타입의 객체들을 저장할 수 있는 리스트를 선언.
         // new ArrayList() : ArrayList는 List 인터페이스를 구현한 클래스, 여기서는 ArrayList의 인스턴스를 생성
         // initialResults: 생성된 ArrayList 인스턴스에 대한 참조를 가지는 변수
+
+        // initialResults 리스트를 생성
         List<Double> initialResults = new ArrayList<>();
-        initialResults.add(10.0);
-        initialResults.add(20.0);
+
 
 
 
         /* Calculator 인스턴스 생성 */
         // Calculator 객체가 initialResults 리스트를 초긱밧으로 가지며 생성
         // Calculator 객체의 results 필드는 initialResults 의 복사본으로 초기화
+
+        // 초기값을 전달받아 Calculator 인스턴스 생성
         Calculator calc = new Calculator(initialResults);
 
 
