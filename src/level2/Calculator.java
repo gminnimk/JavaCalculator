@@ -1,22 +1,21 @@
-/*
-💡 학습 목표
 
-- 클래스 & 메서드 이해하기
-- 생성자 & 접근 제어자 이해하기
-- static & final 이해하기
-- 상속(&포함) & 다형성 이해하기
-- Exception & 예외처리 이해하기
- */
+// Level 2-6
+// Calculator 클래스 수정된 점
+// 기본 생성자 Calculator() 를 유지하면서 초기 결과 리스트를 받을 수 있는 생성자
+// Calculator(List<Double> initialResults)를 추가.
+// 이 생성자는 외부에서 초기 결과 리스트를 전달받아 'results' 필드를 초기화
+
+// results 필드의 초기화를 생성자를 통해 이루어지도록 수정함.
 
 package level2;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-// 적합한 Exception 클래스 생성
-class CalculatorException extends Exception {
-    public CalculatorException(String message) {
+// 아래서 말한 Exception에서 상속받은 CalculateException 클래스를 생성
+// 이 클래스는 입력받은 예외 메시지를 처리함.
+class CalculateException extends Exception {
+    public CalculateException(String message) {
         super(message);
     }
 }
@@ -24,73 +23,44 @@ class CalculatorException extends Exception {
 
 public class Calculator {
 
-
-    /* 연산 결과를 저장하는 컬렉션 타입 필드를 외부에서 직접 접근 하지 못하도록 수정*/
-
-
     // 연산 결과를 저장하는 컬렉션 타입 필드 선언 및 생성
-    // ◆◆◆◆◆ 위 내용에 대해 복습 필요 ◆◆◆◆◆
+    // ★ 컬렉션 선언 시 주의 ★
     private List<Double> results;
-
-    // public List<Double> results;
-    // 위 결과값을 저장하는 컬렉션은 내부에서만 사용되는 데이터 구조이기 때문에 private으로 선언하는게 올바름
-    // 무조건 자료구조 형태라고 private으로 선언하는게 아니라
-    // 전체적인 구조를 보았을때 그 필드가 클래스 내부에서만 사용되는 경우에 해당.
-    // 이는 필드가 외부에서 직접적인 접근 및 조작을 허용하지 않음을 의미.
-
-    // private 으로 선언하게 되면 => 클래스의 캡슐화를 유지하고, 클래스 간의 의존성을 최소화하여
-    // 유연하고 안전한 코드를 작성하는 데 도움이 됨.
-
-    // 따라서, 클래스의 필드를 'private'으로 선언할 때에는 해당 필드가 외부에서 사용될 필요가 없고, 오로지 클래스
-    // 내부에서만 필요한 데이터인지를 고려해야함.
 
 
     // main 클래스에서 호출하기 위한 메서드 생성
-    // Calculator 객체가 생성될 때마다 새로운 ArrayList 가 results 필드에 할당되어 초기화 됨.
-    // 이 생성자를 통해 'Calculator' 객체가 생성될 때마다 결과값들을 저장하기 위한 새로운 리스트가 생성되며
-    // 이 리스트는 해당 객체의 수명 동안 결과값을 저장하는 데 사용.
+    // 생성자 : results 리스트를 초기화 (와부애서 초기값을 받을 수 있도록 수정)
+
+
+    // 기본 생성자
+    // results 필드를 빈 ArrayList로 초기화
+    // Calculator 객체가 기본 생성자를 통해 생설될 때 호출 됨.
     public Calculator() {
-        results = new ArrayList<>();
+        this.results = new ArrayList<>(); // results 필드를 빈 ArrayList 로 초기화
     }
 
 
-    // App 클래스에서 Calculator 클래스의 연산 결과를 저장하고 있는 컬렉션 필드(= results)에
-    // 직접 접근하지 못하도록 수정(=캡슐화)
-
-    // 간접 접근을 통해 필드에 접근하여 가져올 수 있도록 구현 (Getter 메서드)
-    // ★ 주의 ★
-    public List<Double> getResults() {
-        return new ArrayList<>(results);
+    // 초기값을 받는 생성자
+    // initialResults 리스트의 내용을 복사하여 results 필드를 초기화
+    // Calculator 객체가 초기 결과값 리스트를 전달받아 생성될 때 호출.
+    public Calculator(List<Double> initialResults) {
+        this.results = new ArrayList<>(initialResults);
     }
 
 
-    // 간접 접근을 통해 필드에 접근하여 가져올 수 있도록 구현 (Setter 메서드)
-    // setResults() 메서드는 Calculator 클래스의 results 필드에 새로운 결과값 리스트를
-    // 설정하기 위해 만들어졌지만, 현재의 코드에서는 이 메서드를 사용하지 않음.
-
-    // 결과값을 저장하는 컬렉션은 객체가 생성될 때 초기화되고, 그 후에는 필요에 따라 추가되는 값을 calculate() 메서드 내에서만 처리합니다.
-    // 이런 경우에는 setResults() 메서드는 사용되지 않을 수 있습니다.
-
-    // ★ 주의 ★
-    public void setResults(List<Double> results) {
-        this.results = new ArrayList<>(results);
-    }
 
 
-    //getter
-    // 메소드로 필드값을 가공 후 외부로 전달한다.
-
-    //setter
-    // 외부에서 메소드를 통해 데이터에 접근하도록 유도한다.
 
 
-    public double calculate(int num1, int num2, char operator) throws CalculatorException {
+    // (1). 나눗셈에서 분모에 0이 들어오는 경우
+    // (2). 연산자 기호가 잘 못 들어온 경우
+    // => 적합한 Exception 클래스를 생성하여 throw을 처리 해야함.
+    // 그러기 위해서 Exception 클래스를 새로 생성
 
+    public double calculate(int num1, int num2, char operator) throws CalculateException {
 
-        double result = 0; // 연산 결과를 반환할 변수
+        double result = 0; // 결과를 나타내기 위한 변수 선언
 
-
-        // 사칙 연산 기능을 수행 한 후 결과값을 반환하는 메서드
         if (operator == '+') {
             result = num1 + num2;
         } else if (operator == '-') {
@@ -98,27 +68,58 @@ public class Calculator {
         } else if (operator == '*') {
             result = num1 * num2;
         } else if (operator == '/') {
+            // 분모가 0일시 throw 처리
             if (num2 == 0) {
-                throw new CalculatorException("분모에 0이 들어갈 수 없습니다.");
+                throw new CalculateException("분모에 0이 들어갈 수 없습니다.");
             }
             result = num1 / num2;
         } else {
-            throw new CalculatorException("기호를 잘못 입력하였습니다.");
+            // 사칙연산 기호 외 다른 기호를 입력시 throw 처리.
+            throw new CalculateException("사칙연산 기호를 잘못 입력하였습니다");
         }
+        results.add(result); // results 라는 컬렉션에 result 값들을 추가
+        return result;
+    }
 
+    // App 클래스에서 Calculator 클래스의 연산 결과를 저장하고 있는 컬렉션 필드(= results)에
+    // 직접 접근하지 못하도록 수정(=캡슐화)
 
-        // 사칙 연산을 수행했으면 컬렉션 에다가 결과 값 넣어주기.
-        results.add(result);
-        return result; //결과 반환
+    // 간접 접근을 통해 필드에 접근하여 가져올 수 있도록 구현 (Getter 메서드)
+    // ★ 주의 ★
+    public List<Double> getResults() {
+        return new ArrayList<>(results); // 방어적 복사
     }
 
 
-    public void removeResult() {
-
-        // 저장된 연산 결과들 중 가장 먼저 저장된 데이터를 삭제하는 기능을 가진
-        // 메서드를 구현한 후 App 클래스의 main 메서드에 삭제 메서드가 활용될 수 있도록 수정
-        results.remove(0); // 가장 먼저 저장된 데이터를 삭제.
+    // 간접 접근을 통해 필드에 접근하여 가져올 수 있도록 구현 (Setter 메서드)
+    // 외부에서 results 리스트를 수정할 수 있게 함.
+    // 결과값을 저장하는 컬렉션은 객체가 생성될 때 초기화되고, 그 후에는 필요에 따라 추가되는 값을 calculate() 메서드 내에서만 처리합니다.
+    // 이런 경우에는 setResults() 메서드는 사용 X
+    // 만약 결과값 리스트를 외부에서 설정해야 하는 경우나 다른 용도로 사용해야 한다면 setResults() 메서드가 필요할 수 있습니다.
+    // ★ 주의 ★
+    public void setResults(List<Double> results) {
+        this.results = new ArrayList<>(results); // 방어적 복사
     }
+
+
+    // 삭제를 위한 메서드
+    public void removeResults() {
+        if (!results.isEmpty()) {
+            results.remove(0);
+        } else {
+            System.out.println("삭제할 결과가 없습니다.");
+        }
+    }
+
+
+    // 조회를 위한 메서드
+    public void inquiryResults() {
+        System.out.println("저장된 결과 : " + getResults());
+    }
+
+
+    // 양의 정수 2개 & 연산 기호를 매개변수로 받아 사칙연산 기능 수행 후
+    // 결과 값을 반환하는 메서드와 연산 결과를 저장
 
 
     public static void main(String[] args) {
