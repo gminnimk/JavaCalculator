@@ -26,7 +26,7 @@ public class App {
                 // 계산을 수행하는 코드를 구현.
                 // ◆◆◆◆◆ 위 내용에 대한 복습 필요 ◆◆◆◆◆
                 double result = calc.calculate(num1, num2, operator);
-                System.out.println("결과 : " + result);
+                System.out.println("결과 : " + calc.getResults());
 
             } catch (Exception e) {
                 System.out.println(e.getMessage());
